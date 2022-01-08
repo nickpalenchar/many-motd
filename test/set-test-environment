@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+export MANYMOTD_SRC=$PWD/test/motds
+
+echo "test environment ready!"
