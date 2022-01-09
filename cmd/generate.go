@@ -4,8 +4,12 @@ import (
 	"fmt"
 	"log"
 	"many-motd/config"
+	"many-motd/data"
+	"many-motd/formatters"
 	"many-motd/parsers"
+	"math/rand"
 	"os"
+	"time"
 )
 
 func Generate() string {
@@ -20,7 +24,9 @@ func Generate() string {
 	}
 	log.Printf("quotes received: %#v", motds)
 
-	return "A very wise saynig"
+	motd := chooseMotd(motds)
+	message := data.NewMessage(motd, "")
+	return formatters.Billboard(*message, 40)
 }
 
 func getSrcPaths(path string) []string {
@@ -39,4 +45,9 @@ func getSrcPaths(path string) []string {
 		filenames = append(filenames, path+sep+val.Name())
 	}
 	return filenames[:]
+}
+
+func chooseMotd(motds []string) string {
+	rand.Seed(time.Now().UnixNano())
+	return motds[rand.Intn(len(motds))]
 }

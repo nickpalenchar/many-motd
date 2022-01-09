@@ -2,7 +2,6 @@ package parsers
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 )
@@ -10,7 +9,7 @@ import (
 // parseTxt takes a *.txt file and returns slices of each quote.
 // It is expected that each new line in the txt file is a new quote.
 func parseTxt(path string) []string {
-	fmt.Println("parsing txt")
+	log.Println("parsing txt")
 
 	readFile, err := os.Open(path)
 	if err != nil {
@@ -21,7 +20,9 @@ func parseTxt(path string) []string {
 	motds := make([]string, 0, 20)
 
 	for scanner.Scan() {
-		motds = append(motds, scanner.Text())
+		if t := scanner.Text(); t != "" {
+			motds = append(motds, t)
+		}
 	}
 
 	return motds
