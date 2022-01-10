@@ -11,7 +11,6 @@ import (
 func Billboard(m data.Message, w int) string {
 
 	hb := strings.Repeat("#", w+4)
-	fmt.Println("uheonuhnecoheosn", m.Body)
 	msg := wrap(m.Body, w)
 
 	result := []string{
@@ -22,7 +21,9 @@ func Billboard(m data.Message, w int) string {
 		result = append(result, fmt.Sprintf("# %-*s #", w, line))
 	}
 	if m.Author != "" {
-		result = append(result, fmt.Sprintf("# %-*s #", w, "-- "+m.Author))
+		result = append(result, fmt.Sprintf("# %*s #", w, "-- "+m.Author+" "))
+	} else {
+		result = append(result, "#"+strings.Repeat(" ", w+2)+"#")
 	}
 	result = append(result, hb)
 

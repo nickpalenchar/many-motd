@@ -17,7 +17,7 @@ func Generate() string {
 	files := getSrcPaths(src)
 	fmt.Printf("using path is %#v", files)
 
-	motds := make([]string, 0, 30)
+	motds := make([]data.Message, 0, 30)
 
 	for _, file := range files {
 		motds = append(motds, parsers.Parse(file)...)
@@ -25,8 +25,7 @@ func Generate() string {
 	log.Printf("quotes received: %#v", motds)
 
 	motd := chooseMotd(motds)
-	message := data.NewMessage(motd, "")
-	return formatters.Billboard(*message, 40)
+	return formatters.Billboard(*motd, 55)
 }
 
 func getSrcPaths(path string) []string {
@@ -47,7 +46,7 @@ func getSrcPaths(path string) []string {
 	return filenames[:]
 }
 
-func chooseMotd(motds []string) string {
+func chooseMotd(motds []data.Message) *data.Message {
 	rand.Seed(time.Now().UnixNano())
-	return motds[rand.Intn(len(motds))]
+	return &motds[rand.Intn(len(motds))]
 }

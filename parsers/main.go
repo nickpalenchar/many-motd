@@ -4,7 +4,9 @@ and extracts slices of strings for use in motd.
 */
 package parsers
 
-func Parse(path string) []string {
+import "many-motd/data"
+
+func Parse(path string) []data.Message {
 
 	motds := parseTxt(path)
 

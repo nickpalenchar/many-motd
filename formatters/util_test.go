@@ -14,7 +14,6 @@ func TestWrap(t *testing.T) {
 	if want != have {
 		t.Fatalf("wrap = %#v, want %#v", have, want)
 	}
-	return
 }
 
 func TestWrapLongWord(t *testing.T) {
