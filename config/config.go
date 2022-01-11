@@ -7,6 +7,8 @@ import (
 	"github.com/sethvargo/go-envconfig"
 )
 
+const Datadir string = ".data"
+
 type Config struct {
 	Src             string `env:"MANYMOTD_SRC,default=$HOME/.manymotd"`
 	RefreshInterval string `env:"MANYMOTD_REFRESH_INTERVAL"`
